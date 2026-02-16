@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我们的故事</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: url('./bg.gif') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            color: #e8e8e8;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            color: #ff6b9d;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 107, 157, 0.8), 0 0 40px rgba(255, 107, 157, 0.4);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #ffd1dc;
+            font-style: italic;
+            text-shadow: 0 0 10px rgba(255, 209, 220, 0.6);
+        }
+
+        .timer-section {
+            background: rgba(20, 20, 40, 0.75);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 60px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 20px rgba(255, 107, 157, 0.2);
+            border: 1px solid rgba(255, 107, 157, 0.3);
+        }
+
+        .timer-section h2 {
+            color: #ff6b9d;
+            margin-bottom: 30px;
+            font-size: 2em;
+            text-shadow: 0 0 15px rgba(255, 107, 157, 0.6);
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .timer-item {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            padding: 20px 30px;
+            border-radius: 15px;
+            min-width: 120px;
+            box-shadow: 0 0 15px rgba(255, 107, 157, 0.5), 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .timer-item .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .timer-item .label {
+            font-size: 0.9em;
+            color: #fff;
+            margin-top: 5px;
+        }
+
+        .timeline-section {
+            background: rgba(20, 20, 40, 0.75);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 20px rgba(255, 107, 157, 0.2);
+            border: 1px solid rgba(255, 107, 157, 0.3);
+        }
+
+        .timeline-section h2 {
+            color: #ff6b9d;
+            margin-bottom: 40px;
+            text-align: center;
+            font-size: 2em;
+            text-shadow: 0 0 15px rgba(255, 107, 157, 0.6);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #ff6b9d, #c44569);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 30px;
+        }
+
+        .timeline-item::before {
+            content: '❤';
+            position: absolute;
+            left: -17px;
+            top: 5px;
+            font-size: 20px;
+            color: #ff6b9d;
+            background: rgba(20, 20, 40, 0.9);
+            border-radius: 50%;
+            padding: 5px;
+        }
+
+        .timeline-date {
+            font-size: 1.3em;
+            color: #ff6b9d;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
+        }
+
+        .timeline-content {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.15) 0%, rgba(196, 69, 105, 0.15) 100%);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #ff6b9d;
+            color: #e8e8e8;
+        }
+
+        .photo-wall-section {
+            background: rgba(20, 20, 40, 0.75);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 20px rgba(255, 107, 157, 0.2);
+            border: 1px solid rgba(255, 107, 157, 0.3);
+        }
+
+        .photo-wall-section h2 {
+            color: #ff6b9d;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2em;
+            text-shadow: 0 0 15px rgba(255, 107, 157, 0.6);
+        }
+
+        .photo-wall {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .photo-item {
+            aspect-ratio: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-item:hover {
+            transform: scale(1.05);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .love-words-section {
+            background: rgba(20, 20, 40, 0.75);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 20px rgba(255, 107, 157, 0.2);
+            border: 1px solid rgba(255, 107, 157, 0.3);
+        }
+
+        .love-words-section h2 {
+            color: #ff6b9d;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2em;
+            text-shadow: 0 0 15px rgba(255, 107, 157, 0.6);
+        }
+
+        .love-words {
+            text-align: center;
+            font-size: 1.3em;
+            line-height: 2;
+            color: #e8e8e8;
+            font-style: italic;
+        }
+
+        .heart-animation {
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .timer-item {
+                min-width: 80px;
+                padding: 15px 20px;
+            }
+
+            .timer-item .number {
+                font-size: 1.8em;
+            }
+
+            .photo-wall {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="heart-animation">❤ 我们的故事 ❤</h1>
+            <p>从遇见你的那一刻起，我的世界开始变得不同</p>
+        </div>
+
+        <div class="timer-section">
+            <h2>我们已经在一起</h2>
+            <div class="timer">
+                <div class="timer-item">
+                    <div class="number" id="days">0</div>
+                    <div class="label">天</div>
+                </div>
+                <div class="timer-item">
+                    <div class="number" id="hours">0</div>
+                    <div class="label">小时</div>
+                </div>
+                <div class="timer-item">
+                    <div class="number" id="minutes">0</div>
+                    <div class="label">分钟</div>
+                </div>
+                <div class="timer-item">
+                    <div class="number" id="seconds">0</div>
+                    <div class="label">秒</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-section">
+            <h2>相遇时间线</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2024/08/19</div>
+                    <div class="timeline-content">
+                        就在这一天，我们手牵着手开始了我们的爱情，在夏天清凉的晚风中，我们紧紧地相拥在一起。
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2025/06/07</div>
+                    <div class="timeline-content">
+                        我们经历了第一次重大的考验：高考。虽然有很多人在高考以后无奈分别，但是幸运的是，我们的种种努力没有白费，而是让我们能够在同一所大学里继续我们的爱情。
+                        这是一个新的开始，一个全新的篇章。我们携手迎接未来，每一个明天都因为有你在而充满期待和希望。
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2025/09/01</div>
+                    <div class="timeline-content">
+                        我们携手步入大学。
+                        新的开始，新的篇章。我们携手迎接未来，每一个明天都因为有你在而充满期待和希望。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="photo-wall-section">
+            <h2>我们的回忆</h2>
+            <div class="photo-wall" id="photoWall">
+            </div>
+        </div>
+
+        <div class="love-words-section">
+            <h2>想对你说的话</h2>
+            <div class="love-words">
+                <p>遇见你是我一生中最美好的事情</p>
+                <p>wx 是世界上最可爱的大宝贝</p>
+                <p>wx 是我心中最漂亮的小小孩</p>
+                <p>我想和你一起看遍世间所有的风景</p>
+                <p>我想和你一起度过每一个春夏秋冬</p>
+                <p>我会永远永远爱你！！！</p>
+                <p>❤</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const startDate = new Date('2024-08-19T00:00:00');
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        const photoUrls = [
+            './1.jpg',
+            './2.jpg',
+            './3.jpg',
+            './4.jpg',
+            './5.jpg',
+            './6.jpg',
+        ];
+
+        function renderPhotoWall() {
+            const photoWall = document.getElementById('photoWall');
+            photoUrls.forEach(url => {
+                const photoItem = document.createElement('div');
+                photoItem.className = 'photo-item';
+                photoItem.innerHTML = `<img src="${url}" alt="我们的照片">`;
+                photoWall.appendChild(photoItem);
+            });
+        }
+
+        renderPhotoWall();
+    </script>
+</body>
+</html>
